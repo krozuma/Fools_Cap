@@ -1,0 +1,58 @@
+{% extends "comedy/base.html" %}
+{% load social_share %}
+{% block title %}Politics | The Fool's Cap{% endblock %}
+
+{% block content %}
+  <h2 class="section-header">Politics</h2>
+  <hr />
+  {% for article in art %}
+  {% if article.rank == 1 %}
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="vl">
+          <a href="{% url 'detail' article.id %}">
+            <div class="text-center">
+              <img src="{{ article.pic.url }}" class="img-fluid">
+            </div>
+            <h1 class="title">{{ article.headline }}</h1></a>
+              <p>{{ article.pub_date|date:"F j, Y" }}</p>
+              <p class="article">{{ article.content|truncatewords:"35" }}</p>
+        </div>
+        <hr class="firstline" />
+      </div>
+      <div class="col-sm-3"></div>
+  {% elif article.rank == 2 %}
+      <div class="col-sm-3 order-sm-first">
+        <a href="{% url 'detail' article.id %}">
+          <div class="text-center">
+            <img src="{{ article.pic.url }}" class="img-second">
+          </div>
+          <h2 class="title-two">{{ article.headline }}</h2></a>
+            <p>{{ article.pub_date|date:"F j, Y" }}</p>
+            <p class="article">{{ article.content|truncatewords:"20" }}</p>
+            <hr />
+      </div>
+    </div>
+  {% else %}
+    <div class="row" id="secondary">
+      <div class="col-sm-3">
+        <a href="{% url 'detail' article.id %}">
+          <div class="text-center">
+            <img src="{{ article.pic.url }}" class="img-second">
+          </div>
+          <h2 class="title-two">{{ article.headline }}</h2></a>
+            <p>{{ article.pub_date|date:"F j, Y" }}</p>
+            <p class="article">{{ article.content|truncatewords:"20" }}</p>
+            <hr />
+          </div>
+        </div>
+  {% endif %}
+{% endfor %}
+<div class="row">
+  <div class="col-sm">
+<div class="row" id="social">
+{% post_to_facebook object_or_url %}{% post_to_gplus object_or_url %}{% post_to_twitter object_or_url  %}
+</div>
+  </div>
+</div>
+{% endblock %}

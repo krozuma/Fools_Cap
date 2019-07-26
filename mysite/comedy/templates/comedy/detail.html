@@ -1,0 +1,8 @@
+{% extends "comedy/base.html" %}
+{% block title %}{{ art.headline }} | The Fool's Cap{% endblock %}
+
+{% block content %}
+  <h1 class="title">{{ art.headline }}</h1>
+    <p>{{ art.pub_date|date:"F j, Y" }}</p>
+    <p class="article">{{ art.content|linebreaksbr }}</p>
+{% endblock %}
